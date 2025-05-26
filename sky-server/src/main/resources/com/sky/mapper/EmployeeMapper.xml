@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
-<!--    分页查询-->
+    <!--    分页查询-->
     <select id="pageQuery" resultType="com.sky.entity.Employee">
         select
             id,
@@ -25,4 +25,21 @@
         </where>
         order by create_time desc
     </select>
+
+
+    <update id="update">
+        update employee
+        <set>
+            <if test="employee.name != null and employee.name != ''">name = #{employee.name},</if>
+            <if test="employee.username != null and employee.username != ''">username = #{employee.username},</if>
+            <if test="employee.password != null and employee.password != ''">password = #{employee.password},</if>
+            <if test="employee.sex != null and employee.sex != ''">sex = #{employee.sex},</if>
+            <if test="employee.phone != null and employee.phone != ''">phone = #{employee.phone},</if>
+            <if test="employee.idNumber != null and employee.idNumber != ''">id_number = #{employee.idNumber},</if>
+            <if test="employee.updateTime != null">update_time = #{employee.updateTime},</if>
+            <if test="employee.updateUser != null">update_user = #{employee.updateUser},</if>
+            <if test="employee.status != null">status = #{employee.status},</if>
+        </set>
+        where id = #{employee.id}
+    </update>
 </mapper>
